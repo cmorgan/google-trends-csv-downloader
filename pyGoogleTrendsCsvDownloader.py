@@ -158,7 +158,7 @@ class pyGoogleTrendsCsvDownloader(object):
         return data
 
     def get_csv(self, *args, **kwargs):
-        data = self.get_csv_data()
+        data = self.get_csv_data(*args, **kwargs)
         myFile = open('trends_%s.csv' % '_'.join(['%s-%s' % (key, value)
                                                   for (key, value) in
                                                   kwargs.items()]), 'w')
