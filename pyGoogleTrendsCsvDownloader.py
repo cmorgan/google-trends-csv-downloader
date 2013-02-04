@@ -167,3 +167,16 @@ class pyGoogleTrendsCsvDownloader(object):
                                                   kwargs.items()]), 'w')
         myFile.write(data)
         myFile.close()
+
+
+if __name__ == '__main__':
+    import getpass
+    logging.basicConfig(level=logging.INFO)
+
+    username = raw_input('Username: ')
+    password = getpass.getpass()
+
+    downloader = pyGoogleTrendsCsvDownloader(username, password)
+
+    logger.info("Getting csv for q=test")
+    data = downloader.get_csv_data(q='test')
