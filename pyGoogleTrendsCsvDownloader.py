@@ -15,6 +15,10 @@ from cookielib import Cookie, CookieJar
 from StringIO import StringIO
 
 
+class QuotaExceeded(Exception):
+    pass
+
+
 class pyGoogleTrendsCsvDownloader(object):
     '''
     Google Trends Downloader
@@ -142,8 +146,7 @@ class pyGoogleTrendsCsvDownloader(object):
 
         # Make sure everything is working ;)
         if 'Content-Disposition' not in r.info():
-            print "You've exceeded your quota. Continue tomorrow..."
-            sys.exit(0)
+            raise QuotaExceeded('Download quota exceeded. Try again tomorrow.')
 
         if r.info().get('Content-Encoding') == 'gzip':
             buf = StringIO(r.read())
