@@ -3,9 +3,9 @@ import urllib
 import urllib2
 import re
 import csv
+import logging
 import lxml.etree as etree
 import lxml.html as html
-import traceback
 import gzip
 import random
 import time
@@ -13,6 +13,8 @@ import sys
 
 from cookielib import Cookie, CookieJar
 from StringIO import StringIO
+
+logger = logging.getLogger(__name__)
 
 
 class QuotaExceeded(Exception):
@@ -117,7 +119,8 @@ class pyGoogleTrendsCsvDownloader(object):
                     value = input.get('value', '').encode('utf8')
                     self.login_params[name] = value
         except:
-            print("Exception while parsing: %s\n" % traceback.format_exc())
+            logger.warn("Parsing of form failed. Continuing anyway",
+                        exc_info=True)
 
         self.login_params["Email"] = username
         self.login_params["Passwd"] = password
