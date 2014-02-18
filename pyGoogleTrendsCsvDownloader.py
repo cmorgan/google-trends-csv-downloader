@@ -169,7 +169,7 @@ class pyGoogleTrendsCsvDownloader(object):
         myFile.close()
 
 
-if __name__ == '__main__':
+def test():
     import getpass
     logging.basicConfig(level=logging.INFO)
 
